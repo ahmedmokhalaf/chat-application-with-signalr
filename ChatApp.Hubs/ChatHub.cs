@@ -19,7 +19,7 @@ namespace ChatApp.Hubs
 
         public async Task SendGroupMessage(string groupName, string message)
         {
-            await Clients.Group(groupName).SendAsync("ReceiveMessage", Context.User.Identity.Name, message);
+            await Clients.Group(groupName).SendAsync("GroupMessage", Context.User.Identity.Name, message);
         }
 
         public async Task AddToGroup(string groupName)
