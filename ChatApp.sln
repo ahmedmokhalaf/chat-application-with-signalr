@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatApp.Hubs", "ChatApp.Hub
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatApp.Hosting", "ChatApp.Host\ChatApp.Hosting.csproj", "{C7FEB0B7-7969-4DD2-9821-42CF13F75B87}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatApp.BlazorWeb", "ChatApp.BlazorWeb\ChatApp.BlazorWeb.csproj", "{A1853E0E-D679-43B0-BEAB-E60BC5F5893C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C7FEB0B7-7969-4DD2-9821-42CF13F75B87}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C7FEB0B7-7969-4DD2-9821-42CF13F75B87}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C7FEB0B7-7969-4DD2-9821-42CF13F75B87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1853E0E-D679-43B0-BEAB-E60BC5F5893C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1853E0E-D679-43B0-BEAB-E60BC5F5893C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1853E0E-D679-43B0-BEAB-E60BC5F5893C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1853E0E-D679-43B0-BEAB-E60BC5F5893C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
