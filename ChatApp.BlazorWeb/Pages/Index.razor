@@ -1,7 +1,108 @@
 ﻿@page "/"
+@using ChatApp.BlazorWeb.Services
+@using Microsoft.AspNet.SignalR.Hubs
+@using Microsoft.AspNetCore.SignalR.Client
+@inject NavigationManager NavigationManager
+@implements IAsyncDisposable
 
-<h1>Hello, world!</h1>
+<div class="card text-center mx-auto" style="width: 40rem;">
 
-Welcome to your new app.
+    <div class="card">
+        <h5 class="card-header">Chat App</h5>
+        <div class="card-body">
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+            <h5 class="card-title">Send Message To All Connected Clients Now..</h5>
+
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">User Name</span>
+                </div>
+                <input @bind="userInput" disabled="@IsEnable" type="text" class="form-control" aria-label="User Name" aria-describedby="inputGroup-sizing-sm">
+            </div>
+
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Message</span>
+                </div>
+                <textarea @bind="messageInput" size="50" class="form-control" aria-label="Message"></textarea>
+            </div>
+            <button class="btn btn-primary mx-auto m-3" @onclick="Send" disabled="@(!IsConnected)">Send</button>
+        </div>
+        <div class="card-footer text-muted">
+            <ul class="list-group list-group-flush" id="messagesList" style=" max-height: 300px; margin-bottom: 10px;overflow-y:scroll;-webkit-overflow-scrolling: touch;">
+                @foreach (var message in messages)
+                {
+                    <li class='list-group-item'>
+                        <span disabled="@IsSent" class="badge badge-success badge-pill">✔✔</span>
+                        @message
+                    </li>
+
+                }
+
+            </ul>
+
+
+        </div>
+    </div>
+</div>
+
+
+@code {
+    private List<string> messages = new List<string>();
+    private string userInput;
+    private string messageInput;
+    private bool IsEnable = false;
+    private bool IsSent = false;
+    public string MessageInput
+
+    {
+        get => messageInput;
+        set
+        {
+            if (!string.IsNullOrWhiteSpace(messageInput))
+            {
+                messageInput = ((MarkupString)value).ToString();
+            }
+        }
+    }
+
+    private HubConnection connection = new HubConnectionBuilder()
+        .WithUrl(new Uri("https://localhost:4444/chathub"))
+        .WithAutomaticReconnect(new[] { TimeSpan.Zero, TimeSpan.Zero, TimeSpan.FromSeconds(10) })
+        .Build();
+
+    protected override async Task OnInitializedAsync()
+    {
+        connection.On<string, string>("ReceiveMessage", (user, message) =>
+         {
+             var encodedMsg = $"{user}: {message}";
+             messages.Add(encodedMsg);
+             StateHasChanged();
+         });
+
+        await connection.StartAsync();
+    }
+
+    async Task Send()
+    {
+        IsEnable = true;
+        IsSent = true;
+        await connection.SendAsync("SendMessage", userInput, messageInput);
+        messages.Add($"{messageInput}");
+        messageInput = "";
+        StateHasChanged();
+    }
+
+    public bool IsConnected =>
+        connection.State == HubConnectionState.Connected;
+
+    public async ValueTask DisposeAsync()
+    {
+        if (connection is not null)
+        {
+            await connection.DisposeAsync();
+        }
+    }
+
+
+}

@@ -7,14 +7,12 @@ namespace ChatApp.Hubs
     {
         public async Task SendMessage(string fromUser, string message)
         {
-            //await Clients.Caller.SendAsync("ReceiveMessage", "Sent");
-
-            await Clients.Others.SendAsync("ReceiveMessage", Context.User.Identity.Name, message);
+            await Clients.Others.SendAsync("ReceiveMessage", fromUser, message);
         }
 
-        public async Task SendPrivateMessage(string user, string message)
+        public async Task SendPrivateMessage(string fromUser, string message)
         {
-            await Clients.User(user).SendAsync("ReceiveMessage", Context.User.Identity.Name, message);
+            await Clients.User(fromUser).SendAsync("ReceiveMessage", fromUser, message);
         }
 
         public async Task SendGroupMessage(string groupName, string message)
