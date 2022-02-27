@@ -11,6 +11,12 @@
     <PackageReference Include="Microsoft.AspNetCore.ResponseCompression" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="6.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client.Core" Version="6.0.2" />
+    <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="19.4.0.53" />
+    <PackageReference Include="Syncfusion.Xamarin.Cards" Version="19.4.0.53" />
+    <PackageReference Include="Syncfusion.Xamarin.Core" Version="19.4.0.53" />
+    <PackageReference Include="Syncfusion.Xamarin.SfComboBox" Version="19.4.0.53" />
+    <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="19.4.0.53" />
+    <PackageReference Include="Syncfusion.Xamarin.SfRating" Version="19.4.0.53" />
     <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
   </ItemGroup>
 

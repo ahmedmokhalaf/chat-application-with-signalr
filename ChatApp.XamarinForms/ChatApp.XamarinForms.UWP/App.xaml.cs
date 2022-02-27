@@ -1,12 +1,4 @@
-using Syncfusion.SfRating.XForms.UWP;
-using Syncfusion.XForms.UWP.ComboBox;
-using Syncfusion.XForms.UWP.TextInputLayout;
-using Syncfusion.XForms.UWP.Cards;
-using Syncfusion.ListView.XForms.UWP;
-using Syncfusion.XForms.UWP.Graphics;
-using Syncfusion.XForms.UWP.Border;
-using Syncfusion.XForms.UWP.Buttons;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -23,7 +15,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-namespace ChatApp.UniversalWindows
+namespace ChatApp.XamarinForms.UWP
 {
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
@@ -47,6 +39,13 @@ namespace ChatApp.UniversalWindows
         /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
+#if DEBUG
+            if (System.Diagnostics.Debugger.IsAttached)
+            {
+                this.DebugSettings.EnableFrameRateCounter = true;
+            }
+#endif
+
             Frame rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,
@@ -57,6 +56,7 @@ namespace ChatApp.UniversalWindows
                 rootFrame = new Frame();
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
+                Xamarin.Forms.Forms.Init(e);
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
@@ -67,18 +67,15 @@ namespace ChatApp.UniversalWindows
                 Window.Current.Content = rootFrame;
             }
 
-            if (e.PrelaunchActivated == false)
+            if (rootFrame.Content == null)
             {
-                if (rootFrame.Content == null)
-                {
-                    // When the navigation stack isn't restored navigate to the first page,
-                    // configuring the new page by passing required information as a navigation
-                    // parameter
-                    rootFrame.Navigate(typeof(MainPage), e.Arguments);
-                }
-                // Ensure the current window is active
-                Window.Current.Activate();
+                // When the navigation stack isn't restored navigate to the first page,
+                // configuring the new page by passing required information as a navigation
+                // parameter
+                rootFrame.Navigate(typeof(MainPage), e.Arguments);
             }
+            // Ensure the current window is active
+            Window.Current.Activate();
         }
 
         /// <summary>
