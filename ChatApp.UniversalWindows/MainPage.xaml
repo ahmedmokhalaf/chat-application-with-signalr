@@ -1,14 +1,45 @@
-﻿<Page
+﻿<Page 
     x:Class="ChatApp.UniversalWindows.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:local="using:ChatApp.UniversalWindows"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <StackPanel Orientation="Vertical" Opacity="0.75">
+        <StackPanel.Background>
+            <LinearGradientBrush EndPoint="1,1" StartPoint="0,0" ColorInterpolationMode="ScRgbLinearInterpolation" Opacity="0.8" SpreadMethod="Reflect">
+                <LinearGradientBrush.Transform>
+                    <CompositeTransform TranslateX="0" SkewX="5" SkewY="50"/>
+                </LinearGradientBrush.Transform>
+                <LinearGradientBrush.RelativeTransform>
+                    <CompositeTransform CenterY="0.5" CenterX="0.5" Rotation="175"/>
+                </LinearGradientBrush.RelativeTransform>
+                <GradientStop Color="Yellow" Offset="0.0" />
+                <GradientStop Color="Blue" Offset="1" />
 
-    </Grid>
+            </LinearGradientBrush>
+        </StackPanel.Background>
+        <Button x:Name="connectButton" Style="{StaticResource AccentButtonStyle}" Margin="20" Content="Connect" HorizontalAlignment="Center" VerticalAlignment="Bottom" Click="connectButton_Click" />
+        
+        <TextBox x:Name="userTextBox" Header="Enter your name:" Padding="20" Margin="20
+                 " PlaceholderText="Name" AutomationProperties.Name="simple TextBox" Height="92" Width="565"/>
+
+        <TextBox x:Name="messageTextBox" PlaceholderText="Enter Message" Header="Enter your Message:" AutomationProperties.Name="simple text editor" Width="800" Height="113"/>
+
+        <Button x:Name="sendButton" Style="{StaticResource AccentButtonStyle}" Margin="20" Content="Send" Click="sendButton_Click" HorizontalAlignment="Center" VerticalAlignment="Bottom" />
+
+
+        <ListView x:Name="messagesList" >
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <ItemsStackPanel VerticalAlignment="Bottom" ItemsUpdatingScrollMode="KeepLastItemInView" />
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+        </ListView>
+
+    </StackPanel>
 </Page>
