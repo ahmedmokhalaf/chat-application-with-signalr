@@ -1,4 +1,4 @@
-﻿@page "/"
+﻿@page "/testanothernode"
 @using ChatApp.BlazorWeb.Services
 @using Microsoft.AspNet.SignalR.Hubs
 @using Microsoft.AspNetCore.SignalR.Client
@@ -11,7 +11,7 @@
         <h5 class="card-header">Chat App</h5>
         <div class="card-body">
 
-            <h5 class="card-title">Send Message To All Connected Clients Now..</h5>
+            <h5 class="card-title">Send Message To All Connected Clients Now.. from another node</h5>
 
             <div class="input-group input-group-sm mb-3">
                 <div class="input-group-prepend">
@@ -67,7 +67,7 @@
     }
 
     private HubConnection connection = new HubConnectionBuilder()
-        .WithUrl(new Uri("http://localhost/hostchat/chathub"))
+        .WithUrl(new Uri("http://localhost/hostchatnode/chathub"))
         .WithAutomaticReconnect(new[] { TimeSpan.Zero, TimeSpan.Zero, TimeSpan.FromSeconds(10) })
         .Build();
 
