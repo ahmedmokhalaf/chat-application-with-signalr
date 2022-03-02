@@ -1,24 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ChatApp.XamarinForms.MainPage">
+             x:Class="ChatApp.XamarinForms.MainPage"
+             Visual="Material">
 
-    <StackLayout>
-        <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
-            <Label Text="Welcome to Xamarin.Forms!" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
-        </Frame>
-        <Label Text="Start developing now" FontSize="Title" Padding="30,10,30,10"/>
-        <Label Text="Make changes to your XAML file and save to see your UI update in the running app with XAML Hot Reload. Give it a try!" FontSize="16" Padding="30,0,30,0"/>
-        <Label FontSize="16" Padding="30,24,30,0">
-            <Label.FormattedText>
-                <FormattedString>
-                    <FormattedString.Spans>
-                        <Span Text="Learn more at "/>
-                        <Span Text="https://aka.ms/xamarin-quickstart" FontAttributes="Bold"/>
-                    </FormattedString.Spans>
-                </FormattedString>
-            </Label.FormattedText>
-        </Label>
-    </StackLayout>
+    <Grid x:Name="GridChalLayout" VerticalOptions="CenterAndExpand" Padding="5" RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition  Height="0.5*"/>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
+
+        <StackLayout Orientation="Vertical" VerticalOptions="CenterAndExpand" x:Name="layoutConnection" Grid.Row="0">
+            <Label x:Name="lblStatus"/>
+            <Button Text="Connect"  x:Name="btnConnectionPopup" Clicked="GetUserName" />
+        </StackLayout>
+
+        <StackLayout Orientation="Vertical" VerticalOptions="CenterAndExpand" x:Name="layoutMessagesList" Grid.Row="1">
+            <ListView  x:Name="messagesList" SeparatorVisibility="Default" />
+        </StackLayout>
+
+        <StackLayout Orientation="Vertical" IsVisible="true" x:Name="layoutChat" VerticalOptions="CenterAndExpand" Grid.Row="2">
+            <Entry x:Name="messageTextBox"  Placeholder="Enter Message" Visual="Material"/>
+            <Button x:Name="sendButton" Text="Send" Clicked="sendButton_Clicked"  Visual="Material" />
+        </StackLayout>
+
+    </Grid>
 </ContentPage>
+
+
